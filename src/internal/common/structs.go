@@ -17,9 +17,10 @@ type LMAvailableModels struct {
 }
 
 type GPUSpec struct {
-	Name        string `json:"name"`
-	TotalMemory int64  `json:"total_memory"`
-	UsedMemory  int64  `json:"used_memory"`
+	Name              string `json:"name"`
+	TotalMemory       int64  `json:"total_memory"`
+	UsedMemory        int64  `json:"used_memory"`
+	ComputeCapability string `json:"compute_capability,omitempty"`
 }
 
 type HardwareSpec struct {
@@ -27,4 +28,7 @@ type HardwareSpec struct {
 	Memory          int64     `json:"host_memory"`
 	MemoryBandwidth int64     `json:"host_memory_bandwidth"`
 	UsedMemory      int64     `json:"host_memory_used"`
+	CPUArch         string    `json:"cpu_arch,omitempty"`
+	GPUStatus       string    `json:"gpu_status,omitempty"`
+	CollectedAt     string    `json:"collected_at,omitempty"`
 }
