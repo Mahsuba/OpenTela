@@ -722,7 +722,7 @@ func InitializeMyself(walletPubkeyOverride string, wm *wallet.WalletManager) {
 		}
 	}
 
-	myself.Hardware.GPUs = platform.GetGPUInfo()
+	myself.Hardware = platform.GetHardwareSpec()
 
 	// Set role from config.
 	if role := viper.GetString("role"); role != "" {

@@ -250,7 +250,7 @@ func ReannounceLocalServices() {
 	store, _ := GetCRDTStore()
 	key := ds.NewKey(host.ID().String())
 	// refresh hardware and services
-	gpus := platform.GetGPUInfo()
+	hw := platform.GetHardwareSpec()
 	// Start from localServices (the authoritative in-memory set) and merge
 	// any extra services present in the current node table entry so that
 	// services registered through other paths (e.g. HTTP API) are not lost.
@@ -263,7 +263,7 @@ func ReannounceLocalServices() {
 	// silently no-ops on the very next reannounce.
 	merged := mergeAdvertisedServices(snapshotLocalServices(), existingServices, snapshotWithdrawnServices())
 	myselfMu.Lock()
-	myself.Hardware.GPUs = gpus
+	myself.Hardware = hw
 	myself.Service = merged
 	if viper.GetString("public-addr") != "" {
 		myself.PublicAddress = viper.GetString("public-addr")
