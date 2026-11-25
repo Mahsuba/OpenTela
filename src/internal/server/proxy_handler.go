@@ -768,6 +768,12 @@ func globalServiceForwardWithScope(c *gin.Context, scope routingScope) {
 		return
 	}
 
+	// hetero (OpenTela-Hetero): hardware filter, off by default (hetero_router.go).
+	candidates, heteroOK := heteroFilter(c, candidates)
+	if !heteroOK {
+		return
+	}
+
 	clientWallet := ""
 	forwardKeyHash := ""
 	if isControlPlaneEnabled() {
